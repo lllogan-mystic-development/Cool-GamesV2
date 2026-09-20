@@ -55,6 +55,7 @@ function Index() {
     () => games.filter((game) => `${game.title} ${game.category}`.toLowerCase().includes(query.toLowerCase())),
     [query],
   );
+  const folders = useMemo(() => groupByCategory(filtered), [filtered]);
 
   if (activeGame) {
     return (
