@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bot, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
+import { ArrowLeft, Bot, Expand, Folder, FolderOpen, Gamepad2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { BannerAd, NativeAd } from "@/components/AdUnit";
 import { Button } from "@/components/ui/button";
@@ -51,12 +51,17 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [query, setQuery] = useState("");
+  const [openFolder, setOpenFolder] = useState<string | null>(null);
   const [activeGame, setActiveGame] = useState<Game | null>(null);
   const filtered = useMemo(
     () => games.filter((game) => `${game.title} ${game.category}`.toLowerCase().includes(query.toLowerCase())),
     [query],
   );
   const folders = useMemo(() => groupByCategory(filtered), [filtered]);
+  const visibleFolders = useMemo(
+    () => (query ? folders : folders.filter(([category]) => category === openFolder)),
+    [folders, query, openFolder],
+  );
 
   if (activeGame) {
     return (
@@ -123,15 +128,33 @@ function Index() {
           </label>
         </div>
 
+        {!query && !openFolder && (
+          <div className="folder-icons">
+            {folders.map(([category, titles]) => (
+              <button className="folder-tile" key={category} onClick={() => setOpenFolder(category)}>
+                <Folder size={40} />
+                <strong>{category.toUpperCase()}</strong>
+                <small>{titles.length.toString().padStart(2, "0")} FILES</small>
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="folder-list">
-          {folders.map(([category, titles]) => (
+          {visibleFolders.map(([category, titles]) => (
             <section className="folder" key={category}>
               <header className="folder-head">
                 <span className="folder-label">
                   <FolderOpen size={15} />
                   {category.toUpperCase()}
                 </span>
-                <span className="folder-count">{titles.length.toString().padStart(2, "0")} FILES</span>
+                {openFolder === category ? (
+                  <Button variant="ghost" size="sm" onClick={() => setOpenFolder(null)}>
+                    CLOSE
+                  </Button>
+                ) : (
+                  <span className="folder-count">{titles.length.toString().padStart(2, "0")} FILES</span>
+                )}
               </header>
               <div className="game-grid">
                 {titles.map((game, index) => (
