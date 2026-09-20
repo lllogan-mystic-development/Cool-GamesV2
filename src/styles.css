@@ -182,7 +182,12 @@ body { min-width: 320px; }
 .search-box:focus-within { border-color: var(--primary); }
 .search-box input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--foreground); font-size: 12px; letter-spacing: .08em; }
 .search-box button { border: 0; background: transparent; padding: 4px; display: grid; cursor: pointer; }
-.game-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+.folder-list { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px; }
+.folder-head { margin-bottom: 14px; padding-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); }
+.folder-label { display: flex; align-items: center; gap: 9px; color: var(--foreground); font-family: Arial, sans-serif; font-size: 16px; font-weight: 900; letter-spacing: .08em; }
+.folder-label svg { color: var(--primary); }
+.folder-count { color: var(--muted-foreground); font-size: 10px; letter-spacing: .18em; }
+.game-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
 .game-card { position: relative; min-height: 190px; padding: 22px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; text-align: left; border: 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--card) 76%, transparent); cursor: pointer; transition: background-color .2s ease; overflow: hidden; }
 .game-card:hover, .game-card:focus-visible { background: var(--muted); outline: none; }
 .card-number { color: var(--muted-foreground); font-size: 10px; letter-spacing: .15em; }

@@ -1,8 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Expand, Gamepad2, Search, X } from "lucide-react";
+import { ArrowLeft, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { games, type Game } from "@/data/games";
+
+const CATEGORY_ORDER = [
+  "Action",
+  "Adventure",
+  "Arcade",
+  "Casual",
+  "Classic",
+  "Horror",
+  "Platformer",
+  "Puzzle",
+  "Racing",
+  "Rhythm",
+  "RPG",
+  "Runner",
+  "Sports",
+];
+
+function groupByCategory(list: Game[]) {
+  const groups = new Map<string, Game[]>();
+  for (const game of list) {
+    const bucket = groups.get(game.category) ?? [];
+    bucket.push(game);
+    groups.set(game.category, bucket);
+  }
+  return [...groups.entries()].sort(
+    ([a], [b]) =>
+      (CATEGORY_ORDER.indexOf(a) === -1 ? 99 : CATEGORY_ORDER.indexOf(a)) -
+      (CATEGORY_ORDER.indexOf(b) === -1 ? 99 : CATEGORY_ORDER.indexOf(b)),
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +55,7 @@ function Index() {
     () => games.filter((game) => `${game.title} ${game.category}`.toLowerCase().includes(query.toLowerCase())),
     [query],
   );
+  const folders = useMemo(() => groupByCategory(filtered), [filtered]);
 
   if (activeGame) {
     return (
@@ -88,14 +119,27 @@ function Index() {
           </label>
         </div>
 
-        <div className="game-grid">
-          {filtered.map((game, index) => (
-            <button className="game-card" key={game.file} onClick={() => setActiveGame(game)}>
-              <span className="card-number">{String(index + 1).padStart(2, "0")}</span>
-              <span className={`game-mark ${game.tone}`}>{game.mark}</span>
-              <span className="game-copy"><strong>{game.title}</strong><small>{game.category}</small></span>
-              <span className="launch-arrow">↗</span>
-            </button>
+        <div className="folder-list">
+          {folders.map(([category, titles]) => (
+            <section className="folder" key={category}>
+              <header className="folder-head">
+                <span className="folder-label">
+                  <FolderOpen size={15} />
+                  {category.toUpperCase()}
+                </span>
+                <span className="folder-count">{titles.length.toString().padStart(2, "0")} FILES</span>
+              </header>
+              <div className="game-grid">
+                {titles.map((game, index) => (
+                  <button className="game-card" key={game.file} onClick={() => setActiveGame(game)}>
+                    <span className="card-number">{String(index + 1).padStart(2, "0")}</span>
+                    <span className={`game-mark ${game.tone}`}>{game.mark}</span>
+                    <span className="game-copy"><strong>{game.title}</strong><small>{game.category}</small></span>
+                    <span className="launch-arrow">↗</span>
+                  </button>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
         {filtered.length === 0 && <p className="empty-state">NO SIGNAL — TRY ANOTHER SEARCH</p>}
