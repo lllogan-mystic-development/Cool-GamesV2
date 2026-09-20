@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bot, Expand, Folder, FolderOpen, Gamepad2, Search, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { ArrowLeft, Bot, Check, Expand, Eye, Folder, FolderOpen, Gamepad2, RotateCcw, Search, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { BannerAd, NativeAd } from "@/components/AdUnit";
+import { CLOAK_PRESETS, DEFAULT_CLOAK, useTabCloak } from "@/components/TabCloak";
 import { Button } from "@/components/ui/button";
 import { games, type Game } from "@/data/games";
 
@@ -53,6 +54,10 @@ function Index() {
   const [query, setQuery] = useState("");
   const [openFolder, setOpenFolder] = useState<string | null>(null);
   const [activeGame, setActiveGame] = useState<Game | null>(null);
+  const [cloakOpen, setCloakOpen] = useState(false);
+  const cloak = useTabCloak();
+  const [cloakTitle, setCloakTitle] = useState(cloak.title);
+  const [cloakIcon, setCloakIcon] = useState(cloak.icon);
   const filtered = useMemo(
     () => games.filter((game) => `${game.title} ${game.category}`.toLowerCase().includes(query.toLowerCase())),
     [query],
@@ -62,6 +67,28 @@ function Index() {
     () => (query ? folders : folders.filter(([category]) => category === openFolder)),
     [folders, query, openFolder],
   );
+
+  useEffect(() => {
+    if (!cloakOpen) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setCloakOpen(false);
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [cloakOpen]);
+
+  const openCloak = () => {
+    setCloakTitle(cloak.title);
+    setCloakIcon(cloak.icon);
+    setCloakOpen(true);
+  };
+
+  const applyCustomCloak = () => {
+    const title = cloakTitle.trim() || DEFAULT_CLOAK.title;
+    const icon = cloakIcon.trim() || DEFAULT_CLOAK.icon;
+    cloak.applyCloak({ title, icon });
+    setCloakOpen(false);
+  };
 
   if (activeGame) {
     return (
@@ -103,7 +130,12 @@ function Index() {
           <span className="brand-mark"><Gamepad2 size={18} /></span>
           COOL G@MES
         </a>
-        <Link to="/logan" className="ai-link"><Bot size={15} /> LOGAN INTELLIGENCE</Link>
+        <div className="topbar-actions">
+          <Button variant="ghost" size="sm" className="cloak-trigger" onClick={openCloak}>
+            <Eye size={15} /> TAB CLOAK
+          </Button>
+          <Link to="/logan" className="ai-link"><Bot size={15} /> LOGAN INTELLIGENCE</Link>
+        </div>
       </header>
 
       <div className="ad-rail"><BannerAd /></div>
@@ -175,6 +207,67 @@ function Index() {
 
 
       <footer><span>BUILT FOR THE WEB</span><span>ESC = PANIC KEY</span></footer>
+
+      {cloakOpen && (
+        <div className="cloak-overlay" role="presentation" onMouseDown={(event) => {
+          if (event.target === event.currentTarget) setCloakOpen(false);
+        }}>
+          <section className="cloak-panel" role="dialog" aria-modal="true" aria-labelledby="cloak-title">
+            <header className="cloak-panel-head">
+              <div>
+                <p>TAB IDENTITY</p>
+                <h2 id="cloak-title">CLOAK SETTINGS</h2>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setCloakOpen(false)} aria-label="Close tab cloak settings">
+                <X size={18} />
+              </Button>
+            </header>
+
+            <div className="cloak-preview">
+              <img src={cloakIcon || DEFAULT_CLOAK.icon} alt="" onError={(event) => { event.currentTarget.src = DEFAULT_CLOAK.icon; }} />
+              <span>{cloakTitle || DEFAULT_CLOAK.title}</span>
+              <X size={13} />
+            </div>
+
+            <div className="cloak-presets" aria-label="Tab cloak presets">
+              {CLOAK_PRESETS.map((preset) => (
+                <Button
+                  key={preset.title}
+                  variant="outline"
+                  className="cloak-preset"
+                  onClick={() => {
+                    setCloakTitle(preset.title);
+                    setCloakIcon(preset.icon);
+                  }}
+                >
+                  <img src={preset.icon} alt="" />
+                  <span>{preset.title}</span>
+                </Button>
+              ))}
+            </div>
+
+            <label className="cloak-field">
+              <span>TAB TITLE</span>
+              <input value={cloakTitle} maxLength={80} onChange={(event) => setCloakTitle(event.target.value)} placeholder="Cool G@mes" />
+            </label>
+            <label className="cloak-field">
+              <span>ICON URL</span>
+              <input value={cloakIcon} onChange={(event) => setCloakIcon(event.target.value)} placeholder="https://…/icon.png" />
+            </label>
+
+            <div className="cloak-panel-actions">
+              <Button variant="ghost" onClick={() => {
+                cloak.resetCloak();
+                setCloakTitle(DEFAULT_CLOAK.title);
+                setCloakIcon(DEFAULT_CLOAK.icon);
+              }}>
+                <RotateCcw size={15} /> RESET
+              </Button>
+              <Button onClick={applyCustomCloak}><Check size={15} /> APPLY CLOAK</Button>
+            </div>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

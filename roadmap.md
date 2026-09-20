@@ -8,3 +8,4 @@
 - [ ] Add both supplied ads to the game directory
 - [ ] Build and verify `/studyready`
 - [ ] Deliver 100 reusable 25-day codes
+- [x] Add persistent tab cloaking with the Cool G@mes default title and icon
