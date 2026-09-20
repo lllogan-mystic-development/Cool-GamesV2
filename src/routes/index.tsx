@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, Bot, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import { BannerAd, NativeAd } from "@/components/AdUnit";
 import { Button } from "@/components/ui/button";
 import { games, type Game } from "@/data/games";
 
