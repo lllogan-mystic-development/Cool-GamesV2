@@ -275,6 +275,25 @@ footer { border-top: 1px solid var(--border); border-bottom: 0; color: var(--mut
 .chat-input input:focus { border-color: var(--primary); }
 .ai-link { color: var(--muted-foreground); font-size: 11px; letter-spacing: .18em; text-decoration: none; display: flex; align-items: center; gap: 7px; }
 .ai-link:hover { color: var(--primary); }
+.topbar-actions { display: flex; align-items: center; gap: 8px; }
+.cloak-trigger { color: var(--muted-foreground); font-size: 10px; letter-spacing: .12em; }
+.cloak-trigger:hover { color: var(--primary); }
+.cloak-overlay { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 18px; background: color-mix(in oklab, var(--background) 78%, transparent); backdrop-filter: blur(8px); }
+.cloak-panel { width: min(100%, 560px); max-height: calc(100dvh - 36px); overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); box-shadow: 0 24px 80px color-mix(in oklab, var(--background) 82%, transparent); }
+.cloak-panel-head { padding: 20px 20px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+.cloak-panel-head p { margin: 0 0 5px; color: var(--primary); font-size: 9px; letter-spacing: .2em; }
+.cloak-panel-head h2 { margin: 0; font-family: Arial, sans-serif; font-size: 20px; letter-spacing: 0; }
+.cloak-preview { height: 50px; margin: 20px; padding: 0 13px; display: grid; grid-template-columns: 20px minmax(0, 1fr) 14px; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 7px 7px 0 0; background: var(--background); color: var(--muted-foreground); font-family: Arial, sans-serif; font-size: 12px; }
+.cloak-preview img, .cloak-preset img { width: 18px; height: 18px; object-fit: contain; }
+.cloak-preview span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cloak-presets { padding: 0 20px 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.cloak-preset { height: 42px; min-width: 0; justify-content: flex-start; overflow: hidden; background: var(--background); font-size: 11px; }
+.cloak-preset span { overflow: hidden; text-overflow: ellipsis; }
+.cloak-field { margin: 0 20px 14px; display: grid; gap: 7px; }
+.cloak-field > span { color: var(--muted-foreground); font-size: 9px; letter-spacing: .17em; }
+.cloak-field input { width: 100%; height: 42px; box-sizing: border-box; padding: 0 12px; border: 1px solid var(--border); border-radius: var(--radius); outline: 0; background: var(--background); color: var(--foreground); font-size: 12px; }
+.cloak-field input:focus { border-color: var(--primary); }
+.cloak-panel-actions { margin-top: 20px; padding: 16px 20px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--border); }
 
 /* Folder icon grid */
 .folder-icons { max-width: 1180px; margin: 0 auto 36px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
@@ -284,3 +303,14 @@ footer { border-top: 1px solid var(--border); border-bottom: 0; color: var(--mut
 .folder-tile strong { font-family: Arial, sans-serif; font-size: 13px; letter-spacing: .08em; color: var(--foreground); }
 .folder-tile small { font-size: 10px; letter-spacing: .16em; color: var(--muted-foreground); }
 @media (max-width: 720px) { .folder-icons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .topbar-actions { gap: 2px; }
+  .cloak-trigger { width: 36px; padding: 0; }
+  .cloak-trigger svg { width: 17px; height: 17px; }
+  .cloak-trigger { font-size: 0; }
+  .ai-link { font-size: 0; }
+  .ai-link svg { width: 17px; height: 17px; }
+  .cloak-presets { grid-template-columns: 1fr; }
+  .cloak-panel-actions { align-items: stretch; flex-direction: column-reverse; }
+  .cloak-panel-actions button { width: 100%; }
+}
