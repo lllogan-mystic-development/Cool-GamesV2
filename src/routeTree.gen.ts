@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdsRouteImport } from './routes/ads'
 import { Route as LlloganRouteImport } from './routes/lllogan'
 import { Route as LoganRouteImport } from './routes/logan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdsRoute = AdsRouteImport.update({
+  id: '/ads',
+  path: '/ads',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlloganRoute = LlloganRouteImport.update({
@@ -31,30 +37,34 @@ const LoganRoute = LoganRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ads': typeof AdsRoute
   '/lllogan': typeof LlloganRoute
   '/logan': typeof LoganRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ads': typeof AdsRoute
   '/lllogan': typeof LlloganRoute
   '/logan': typeof LoganRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ads': typeof AdsRoute
   '/lllogan': typeof LlloganRoute
   '/logan': typeof LoganRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lllogan' | '/logan'
+  fullPaths: '/' | '/ads' | '/lllogan' | '/logan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/lllogan' | '/logan'
-  id: '__root__' | '/' | '/lllogan' | '/logan'
+  to: '/' | '/ads' | '/lllogan' | '/logan'
+  id: '__root__' | '/' | '/ads' | '/lllogan' | '/logan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdsRoute: typeof AdsRoute
   LlloganRoute: typeof LlloganRoute
   LoganRoute: typeof LoganRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ads': {
+      id: '/ads'
+      path: '/ads'
+      fullPath: '/ads'
+      preLoaderRoute: typeof AdsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lllogan': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdsRoute: AdsRoute,
   LlloganRoute: LlloganRoute,
   LoganRoute: LoganRoute,
 }
