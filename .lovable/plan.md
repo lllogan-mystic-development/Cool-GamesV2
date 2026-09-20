@@ -1,19 +1,17 @@
-# Ads and StudyReady Access
+# Tab Cloaking
 
 ## Build
-- Add the supplied 728×90 placement and native banner to the game directory, with responsive containers that fit smaller screens.
-- Add `/studyready` in the existing Cool G@mes visual style with a code entry form and clear success, invalid, and expired states.
-- Generate 100 access codes and store only secure code hashes.
-- On a code's first successful redemption, start its 25-day lifetime. The same code can be reused during that window; after 25 days it is permanently expired.
-- Remember an authorized browser so ads stay hidden across visits until that code expires.
-- Hide both ads for authorized visitors without changing the game library or player layout.
+- Add a compact tab-cloaking control to the main Cool G@mes top bar.
+- Open a polished settings panel where visitors can choose a preset or enter a custom browser-tab title and icon URL.
+- Default the tab to **Cool G@mes** with the supplied Discord-hosted icon.
+- Apply changes immediately and remember them in that browser.
+- Include a reset action that restores the Cool G@mes title and icon.
 
 ## Technical details
-- Enable Lovable Cloud for server-validated code redemption and expiration.
-- Add a protected access-code table with explicit grants and row-level security; visitors never receive the code list or hashes.
-- Redeem codes through a server function and use a signed, expiring browser token for ad-free status.
-- Keep third-party ad scripts client-only to avoid page rendering issues.
-- Add unique metadata for `/studyready` and verify the ad-supported and ad-free flows on phone and desktop.
+- Keep the feature browser-only so page rendering remains stable.
+- Update the document title and favicon dynamically without changing page content.
+- Preserve each page's metadata while making the chosen cloak control the visible browser tab.
+- Make the panel usable on phone and desktop with accessible labels and keyboard dismissal.
 
-## Deliverable
-- Provide the 100 generated plaintext codes once, as a downloadable text file for the site owner.
+## Verification
+- Confirm the default title and icon, custom values, presets, persistence after reload, and reset behavior.
