@@ -19,6 +19,7 @@
  */
 
 @theme inline {
+  --font-sans: "IBM Plex Mono", "Courier New", monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,25 +63,25 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.3rem;
+  --background: oklch(0.095 0.005 260);
+  --foreground: oklch(0.94 0.005 250);
+  --card: oklch(0.13 0.006 260);
+  --card-foreground: oklch(0.94 0.005 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.7 0.19 32);
+  --primary-foreground: oklch(0.12 0.01 30);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --muted: oklch(0.17 0.006 260);
+  --muted-foreground: oklch(0.62 0.008 250);
+  --accent: oklch(0.74 0.17 145);
+  --accent-foreground: oklch(0.1 0.01 145);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
+  --border: oklch(0.25 0.008 260);
+  --input: oklch(0.19 0.007 260);
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -140,5 +141,83 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    margin: 0;
+    font-family: var(--font-sans);
   }
+
+  button, input { font: inherit; }
+  button { color: inherit; }
+}
+
+html { scroll-behavior: smooth; }
+body { min-width: 320px; }
+
+.launcher-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px),
+    radial-gradient(circle at 35% 18%, color-mix(in oklab, var(--foreground) 7%, transparent), transparent 33%),
+    var(--background);
+  background-size: 72px 72px, 72px 72px, auto, auto;
+}
+
+.topbar, footer { height: 66px; padding: 0 clamp(20px, 5vw, 68px); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 84%, transparent); backdrop-filter: blur(12px); }
+.brand { color: var(--foreground); text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .12em; display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); }
+.live-indicator { color: var(--muted-foreground); font-size: 11px; letter-spacing: .18em; display: flex; align-items: center; gap: 8px; }
+.live-indicator i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: pulse 2s ease-in-out infinite; }
+
+.intro { min-height: 440px; padding: 105px 6vw 72px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.eyebrow, .section-kicker { color: var(--muted-foreground); font-size: 11px; letter-spacing: .3em; margin: 0 0 18px; }
+.intro h1 { margin: 0; font-family: Arial, sans-serif; font-size: clamp(64px, 12vw, 156px); line-height: .77; letter-spacing: 0; font-weight: 900; }
+.intro h1 span { color: transparent; -webkit-text-stroke: 1px var(--muted-foreground); }
+.lede { margin: 34px 0 0; color: var(--muted-foreground); font-size: clamp(13px, 2vw, 18px); }
+
+.library { padding: 42px clamp(18px, 5vw, 68px) 110px; border-top: 1px solid var(--border); background: color-mix(in oklab, var(--background) 92%, transparent); }
+.library-head { max-width: 1180px; margin: 0 auto 28px; display: flex; gap: 24px; justify-content: space-between; align-items: end; }
+.library-head h2 { font-size: 20px; margin: 0; }
+.section-kicker { margin-bottom: 9px; }
+.search-box { width: min(100%, 350px); height: 46px; padding: 0 14px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); color: var(--muted-foreground); }
+.search-box:focus-within { border-color: var(--primary); }
+.search-box input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--foreground); font-size: 12px; letter-spacing: .08em; }
+.search-box button { border: 0; background: transparent; padding: 4px; display: grid; cursor: pointer; }
+.game-grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+.game-card { position: relative; min-height: 190px; padding: 22px; display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; text-align: left; border: 0; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--card) 76%, transparent); cursor: pointer; transition: background-color .2s ease; overflow: hidden; }
+.game-card:hover, .game-card:focus-visible { background: var(--muted); outline: none; }
+.card-number { color: var(--muted-foreground); font-size: 10px; letter-spacing: .15em; }
+.game-mark { align-self: center; justify-self: start; min-width: 62px; height: 62px; padding: 0 10px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); font-family: Arial, sans-serif; font-size: 23px; font-weight: 900; background: var(--background); }
+.game-mark.signal { color: var(--primary); } .game-mark.acid { color: var(--accent); } .game-mark.sky { color: var(--chart-2); } .game-mark.violet { color: var(--chart-4); } .game-mark.amber { color: var(--chart-5); } .game-mark.danger { color: var(--destructive); }
+.game-copy { align-self: end; display: flex; flex-direction: column; gap: 5px; }
+.game-copy strong { font-family: Arial, sans-serif; font-size: 17px; letter-spacing: 0; }
+.game-copy small { color: var(--muted-foreground); font-size: 10px; text-transform: uppercase; letter-spacing: .13em; }
+.launch-arrow { align-self: end; color: var(--muted-foreground); font-size: 22px; }
+.empty-state { max-width: 1180px; padding: 70px 0; margin: 0 auto; text-align: center; color: var(--muted-foreground); font-size: 12px; letter-spacing: .15em; }
+footer { border-top: 1px solid var(--border); border-bottom: 0; color: var(--muted-foreground); font-size: 10px; letter-spacing: .18em; }
+
+.game-stage { height: 100dvh; display: grid; grid-template-rows: 64px 1fr; background: var(--background); }
+.stage-bar { padding: 0 14px; display: grid; grid-template-columns: 42px 1fr 42px; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+.stage-bar div { min-width: 0; text-align: center; }
+.stage-bar p { margin: 0 0 3px; color: var(--primary); font-size: 8px; letter-spacing: .18em; }
+.stage-bar h1 { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: Arial, sans-serif; font-size: 15px; letter-spacing: 0; }
+.icon-button { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); cursor: pointer; }
+.icon-button:hover { background: var(--muted); }
+.game-frame { width: 100%; height: 100%; border: 0; background: var(--background); }
+
+@keyframes pulse { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+@media (max-width: 720px) {
+  .topbar { height: 58px; padding: 0 18px; }
+  .intro { min-height: 360px; padding: 76px 18px 58px; }
+  .intro h1 { font-size: 66px; }
+  .lede { margin-top: 26px; }
+  .library { padding: 28px 14px 80px; }
+  .library-head { align-items: stretch; flex-direction: column; }
+  .search-box { width: auto; }
+  .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .game-card { min-height: 168px; padding: 16px; }
+  .game-mark { min-width: 54px; height: 54px; font-size: 20px; }
+  .game-copy strong { font-size: 15px; }
+  footer { padding: 0 18px; font-size: 8px; }
 }
