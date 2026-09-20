@@ -1,8 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Expand, Gamepad2, Search, X } from "lucide-react";
+import { ArrowLeft, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { games, type Game } from "@/data/games";
+
+const CATEGORY_ORDER = [
+  "Action",
+  "Adventure",
+  "Arcade",
+  "Casual",
+  "Classic",
+  "Horror",
+  "Platformer",
+  "Puzzle",
+  "Racing",
+  "Rhythm",
+  "RPG",
+  "Runner",
+  "Sports",
+];
+
+function groupByCategory(list: Game[]) {
+  const groups = new Map<string, Game[]>();
+  for (const game of list) {
+    const bucket = groups.get(game.category) ?? [];
+    bucket.push(game);
+    groups.set(game.category, bucket);
+  }
+  return [...groups.entries()].sort(
+    ([a], [b]) =>
+      (CATEGORY_ORDER.indexOf(a) === -1 ? 99 : CATEGORY_ORDER.indexOf(a)) -
+      (CATEGORY_ORDER.indexOf(b) === -1 ? 99 : CATEGORY_ORDER.indexOf(b)),
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
