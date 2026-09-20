@@ -119,14 +119,27 @@ function Index() {
           </label>
         </div>
 
-        <div className="game-grid">
-          {filtered.map((game, index) => (
-            <button className="game-card" key={game.file} onClick={() => setActiveGame(game)}>
-              <span className="card-number">{String(index + 1).padStart(2, "0")}</span>
-              <span className={`game-mark ${game.tone}`}>{game.mark}</span>
-              <span className="game-copy"><strong>{game.title}</strong><small>{game.category}</small></span>
-              <span className="launch-arrow">↗</span>
-            </button>
+        <div className="folder-list">
+          {folders.map(([category, titles]) => (
+            <section className="folder" key={category}>
+              <header className="folder-head">
+                <span className="folder-label">
+                  <FolderOpen size={15} />
+                  {category.toUpperCase()}
+                </span>
+                <span className="folder-count">{titles.length.toString().padStart(2, "0")} FILES</span>
+              </header>
+              <div className="game-grid">
+                {titles.map((game, index) => (
+                  <button className="game-card" key={game.file} onClick={() => setActiveGame(game)}>
+                    <span className="card-number">{String(index + 1).padStart(2, "0")}</span>
+                    <span className={`game-mark ${game.tone}`}>{game.mark}</span>
+                    <span className="game-copy"><strong>{game.title}</strong><small>{game.category}</small></span>
+                    <span className="launch-arrow">↗</span>
+                  </button>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
         {filtered.length === 0 && <p className="empty-state">NO SIGNAL — TRY ANOTHER SEARCH</p>}
