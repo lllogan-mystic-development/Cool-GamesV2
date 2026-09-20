@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LlloganRouteImport } from './routes/lllogan'
+import { Route as LoganRouteImport } from './routes/logan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const LlloganRoute = LlloganRouteImport.update({
   path: '/lllogan',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoganRoute = LoganRouteImport.update({
+  id: '/logan',
+  path: '/logan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/lllogan': typeof LlloganRoute
+  '/logan': typeof LoganRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/lllogan': typeof LlloganRoute
+  '/logan': typeof LoganRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/lllogan': typeof LlloganRoute
+  '/logan': typeof LoganRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lllogan'
+  fullPaths: '/' | '/lllogan' | '/logan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/lllogan'
-  id: '__root__' | '/' | '/lllogan'
+  to: '/' | '/lllogan' | '/logan'
+  id: '__root__' | '/' | '/lllogan' | '/logan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LlloganRoute: typeof LlloganRoute
+  LoganRoute: typeof LoganRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LlloganRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/logan': {
+      id: '/logan'
+      path: '/logan'
+      fullPath: '/logan'
+      preLoaderRoute: typeof LoganRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LlloganRoute: LlloganRoute,
+  LoganRoute: LoganRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

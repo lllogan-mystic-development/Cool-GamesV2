@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, Bot, Expand, FolderOpen, Gamepad2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import { BannerAd, NativeAd } from "@/components/AdUnit";
 import { Button } from "@/components/ui/button";
 import { games, type Game } from "@/data/games";
 
@@ -97,8 +98,11 @@ function Index() {
           <span className="brand-mark"><Gamepad2 size={18} /></span>
           COOL G@MES
         </a>
-        <span className="live-indicator"><i /> LIVE</span>
+        <Link to="/logan" className="ai-link"><Bot size={15} /> LOGAN INTELLIGENCE</Link>
       </header>
+
+      <div className="ad-rail"><BannerAd /></div>
+
 
       <section className="intro">
         <p className="eyebrow">ARCHIVE // ONLINE</p>
@@ -143,7 +147,9 @@ function Index() {
           ))}
         </div>
         {filtered.length === 0 && <p className="empty-state">NO SIGNAL — TRY ANOTHER SEARCH</p>}
+        <div className="ad-rail"><NativeAd /></div>
       </section>
+
 
       <footer><span>BUILT FOR THE WEB</span><span>ESC = PANIC KEY</span></footer>
     </main>
