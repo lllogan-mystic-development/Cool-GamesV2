@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, Expand, Gamepad2, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { games, type Game } from "@/data/games";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,23 +18,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const games = [
-  { title: "Drive Mad", file: "drive-mad", mark: "DM", tone: "signal", category: "Racing" },
-  { title: "Slope", file: "slope", mark: "S/", tone: "acid", category: "Arcade" },
-  { title: "Subway Surfers", file: "subway-surfers", mark: "SS", tone: "sky", category: "Runner" },
-  { title: "Block Blast", file: "block-blast", mark: "BB", tone: "violet", category: "Puzzle" },
-  { title: "Run 3", file: "run-3", mark: "R3", tone: "mono", category: "Runner" },
-  { title: "Cookie Clicker", file: "cookie-clicker", mark: "CC", tone: "amber", category: "Idle" },
-  { title: "Among Us", file: "among-us", mark: "AU", tone: "danger", category: "Action" },
-  { title: "1v1.LOL", file: "1v1-lol", mark: "1V1", tone: "sky", category: "Action" },
-  { title: "Pac-Man", file: "pac-man", mark: "PM", tone: "amber", category: "Classic" },
-  { title: "BitLife", file: "bitlife", mark: "BL", tone: "acid", category: "Simulation" },
-  { title: "Temple Run 2", file: "temple-run-2", mark: "TR", tone: "signal", category: "Runner" },
-  { title: "Tiny Fishing", file: "tiny-fishing", mark: "TF", tone: "violet", category: "Casual" },
-];
-
-type Game = (typeof games)[number];
-
 function Index() {
   const [query, setQuery] = useState("");
   const [activeGame, setActiveGame] = useState<Game | null>(null);
@@ -44,22 +29,24 @@ function Index() {
   if (activeGame) {
     return (
       <main className="game-stage">
-        <header className="stage-bar">
-          <button className="icon-button" onClick={() => setActiveGame(null)} aria-label="Back to games" title="Back to games">
+        <header className="topbar stage-bar">
+          <Button variant="outline" size="icon" className="icon-button" onClick={() => setActiveGame(null)} aria-label="Back to games" title="Back to games">
             <ArrowLeft size={19} />
-          </button>
-          <div>
+          </Button>
+          <div className="stage-title">
             <p>NOW PLAYING</p>
             <h1>{activeGame.title}</h1>
           </div>
-          <button
+          <Button
+            variant="outline"
+            size="icon"
             className="icon-button"
             onClick={() => document.querySelector("iframe")?.requestFullscreen?.()}
             aria-label="Enter fullscreen"
             title="Enter fullscreen"
           >
             <Expand size={18} />
-          </button>
+          </Button>
         </header>
         <iframe
           src={`/games/${activeGame.file}.html`}
@@ -97,7 +84,7 @@ function Index() {
           <label className="search-box">
             <Search size={17} />
             <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="SEARCH GAMES" aria-label="Search games" />
-            {query && <button onClick={() => setQuery("")} aria-label="Clear search"><X size={16} /></button>}
+            {query && <Button variant="ghost" size="icon" onClick={() => setQuery("")} aria-label="Clear search"><X size={16} /></Button>}
           </label>
         </div>
 
