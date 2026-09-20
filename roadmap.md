@@ -1,5 +1,6 @@
 # Roadmap
 
-- [x] Inspect the referenced game repository and identify usable games
-- [x] Build the mobile-first dark game launcher
-- [x] Verify the launcher visually on mobile and desktop
+- [ ] Import every playable game from the source collection
+- [ ] Add every game to the searchable directory
+- [ ] Make active games fill the viewport below the top bar
+- [ ] Verify the full library and player on phone and desktop
