@@ -5,19 +5,33 @@ import { Button } from "@/components/ui/button";
 
 const UPSTREAM = "https://cg.ah.football";
 
-const WORKER_CODE = `export default {
+const WORKER_CODE = `// Cool G@mes mirror — Cloudflare Worker
+const UPSTREAM = "${UPSTREAM}";
+
+export default {
   async fetch(request) {
     const url = new URL(request.url);
     // Proxy everything to Cool G@mes
-    const upstreamUrl = new URL(url.pathname + url.search, "${UPSTREAM}");
-    return fetch(upstreamUrl, {
+    const upstreamUrl = new URL(url.pathname + url.search, UPSTREAM);
+
+    const headers = new Headers(request.headers);
+    headers.set("Host", upstreamUrl.host);
+    headers.set("X-Forwarded-Host", url.host);
+
+    const upstreamRequest = new Request(upstreamUrl.toString(), {
       method: request.method,
-      headers: request.headers,
-      body: request.body,
+      headers,
+      body: ["GET", "HEAD"].includes(request.method) ? undefined : request.body,
       redirect: "manual",
     });
-  }
-}`;
+
+    const response = await fetch(upstreamRequest);
+    const out = new Response(response.body, response);
+    out.headers.delete("content-security-policy");
+    out.headers.delete("x-frame-options");
+    return out;
+  },
+};`;
 
 export const Route = createFileRoute("/lllogan")({
   head: () => ({
@@ -137,10 +151,15 @@ function Lllogan() {
                   <span className="code-label">
                     <Cloud size={13} /> worker.js
                   </span>
-                  <Button variant="outline" size="sm" className="copy-button" onClick={copyCode}>
-                    {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? "COPIED" : "COPY"}
-                  </Button>
+                  <span className="code-actions">
+                    <a className="copy-button" href="/cool-games-worker.js" download="worker.js">
+                      DOWNLOAD
+                    </a>
+                    <Button variant="outline" size="sm" className="copy-button" onClick={copyCode}>
+                      {copied ? <Check size={14} /> : <Copy size={14} />}
+                      {copied ? "COPIED" : "COPY"}
+                    </Button>
+                  </span>
                 </div>
                 <pre>
                   <code>{WORKER_CODE}</code>
