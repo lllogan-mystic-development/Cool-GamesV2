@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bot, Check, Expand, Eye, Folder, FolderOpen, Gamepad2, Megaphone, RotateCcw, Search, X } from "lucide-react";
+import { ArrowLeft, Bot, Check, Expand, Eye, Folder, FolderOpen, Gamepad2, Globe, Megaphone, RotateCcw, Search, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BannerAd, NativeAd } from "@/components/AdUnit";
 import { CLOAK_PRESETS, DEFAULT_CLOAK, useTabCloak } from "@/components/TabCloak";
