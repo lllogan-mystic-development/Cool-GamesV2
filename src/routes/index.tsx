@@ -163,6 +163,11 @@ function Index() {
 
         {!query && !openFolder && (
           <div className="folder-icons">
+            <button className="folder-tile tools-tile" onClick={() => setOpenFolder("Tools")}>
+              <Folder size={40} />
+              <strong>TOOLS</strong>
+              <small>03 FILES</small>
+            </button>
             {folders.map(([category, titles]) => (
               <button className="folder-tile" key={category} onClick={() => setOpenFolder(category)}>
                 <Folder size={40} />
@@ -170,6 +175,42 @@ function Index() {
                 <small>{titles.length.toString().padStart(2, "0")} FILES</small>
               </button>
             ))}
+          </div>
+        )}
+
+        {!query && openFolder === "Tools" && (
+          <div className="folder-list">
+            <section className="folder">
+              <header className="folder-head">
+                <span className="folder-label">
+                  <FolderOpen size={15} />
+                  TOOLS
+                </span>
+                <Button variant="ghost" size="sm" onClick={() => setOpenFolder(null)}>
+                  CLOSE
+                </Button>
+              </header>
+              <div className="game-grid">
+                <Link to="/lllogan" className="game-card tool-card">
+                  <span className="card-number">01</span>
+                  <span className="game-mark sky"><Globe size={26} /></span>
+                  <span className="game-copy"><strong>BYOD</strong><small>Bring your own domain — mirror setup</small></span>
+                  <span className="launch-arrow">↗</span>
+                </Link>
+                <Link to="/logan" className="game-card tool-card">
+                  <span className="card-number">02</span>
+                  <span className="game-mark violet"><Bot size={26} /></span>
+                  <span className="game-copy"><strong>LOGAN AI</strong><small>Chat with Logan Intelligence</small></span>
+                  <span className="launch-arrow">↗</span>
+                </Link>
+                <Link to="/ads" className="game-card tool-card">
+                  <span className="card-number">03</span>
+                  <span className="game-mark signal"><Megaphone size={26} /></span>
+                  <span className="game-copy"><strong>AD WALL</strong><small>Sponsor board, refreshes every 12s</small></span>
+                  <span className="launch-arrow">↗</span>
+                </Link>
+              </div>
+            </section>
           </div>
         )}
 
