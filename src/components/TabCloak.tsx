@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 
 export const DEFAULT_CLOAK = {
   title: "Cool G@mes",
-  icon: "https://cdn.discordapp.com/icons/1435725405897097259/2866f9c56c1a53c10083fd2293c33c08.png?size=4096",
+  icon: "/cool-games-icon.png",
 };
 
 export const CLOAK_PRESETS = [
