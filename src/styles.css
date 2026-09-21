@@ -375,3 +375,16 @@ a.copy-button {
     grid-template-columns: 1fr;
   }
 }
+
+.tools-tile {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.game-card.tool-card {
+  text-decoration: none;
+}
+
+.game-mark svg {
+  display: block;
+}
