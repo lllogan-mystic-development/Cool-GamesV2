@@ -314,3 +314,64 @@ footer { border-top: 1px solid var(--border); border-bottom: 0; color: var(--mut
   .cloak-panel-actions { align-items: stretch; flex-direction: column-reverse; }
   .cloak-panel-actions button { width: 100%; }
 }
+
+/* Ad wall */
+.adwall-controls {
+  display: flex;
+  gap: 8px;
+}
+.adwall-progress {
+  height: 4px;
+  width: 100%;
+  border: 1px solid hsl(var(--border, 0 0% 20%));
+  background: rgba(255, 255, 255, 0.04);
+  margin: 14px 0 20px;
+  overflow: hidden;
+}
+.adwall-progress i {
+  display: block;
+  height: 100%;
+  background: var(--accent-signal, #f43f3f);
+  transition: width 0.9s linear;
+}
+.adwall-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.adwall-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  min-height: 150px;
+}
+.adwall-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+  margin-bottom: 10px;
+}
+.code-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+a.copy-button {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-decoration: none;
+  color: inherit;
+}
+@media (max-width: 720px) {
+  .adwall-grid {
+    grid-template-columns: 1fr;
+  }
+}
