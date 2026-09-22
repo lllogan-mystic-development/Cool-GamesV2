@@ -8,7 +8,7 @@ const SCRIPT_ID = "cg-popunder-script";
 
 function getTapCount(): number {
   const match = document.cookie.match(new RegExp(`(?:^|; )${COOKIE_NAME}=(\\d+)`));
-  return match ? parseInt(match[1], 10) : 0;
+  return match?.[1] ? parseInt(match[1], 10) : 0;
 }
 
 function setTapCount(value: number) {
