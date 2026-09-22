@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Bot, Check, Expand, Eye, Folder, FolderOpen, Gamepad2, Globe, Megaphone, RotateCcw, Search, X } from "lucide-react";
+import { ArrowLeft, Bot, Check, Expand, Eye, Folder, FolderOpen, Gamepad2, Globe, Megaphone, RotateCcw, Search, Users, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BannerAd, NativeAd } from "@/components/AdUnit";
 import { CLOAK_PRESETS, DEFAULT_CLOAK, useTabCloak } from "@/components/TabCloak";
@@ -134,6 +134,7 @@ function Index() {
           <Button variant="ghost" size="sm" className="cloak-trigger" onClick={openCloak}>
             <Eye size={15} /> TAB CLOAK
           </Button>
+          <a href="https://discord.gg/8PGsWNGPBE" target="_blank" rel="noopener noreferrer" className="ai-link discord-link"><Users size={15} /> JOIN THE DISCORD</a>
           <Link to="/ads" className="ai-link"><Megaphone size={15} /> AD WALL</Link>
           <Link to="/logan" className="ai-link"><Bot size={15} /> LOGAN INTELLIGENCE</Link>
         </div>
