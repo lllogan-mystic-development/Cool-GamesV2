@@ -36,11 +36,12 @@ export function PopUnder() {
       setTapCount(next);
       if (next >= MAX_TAPS) {
         document.getElementById(SCRIPT_ID)?.remove();
-        document.removeEventListener("pointerdown", onTap);
+        document.removeEventListener("pointerdown", onTap, true);
       }
     };
-    document.addEventListener("pointerdown", onTap);
-    return () => document.removeEventListener("pointerdown", onTap);
+    // Capture phase so taps on buttons/cards still count.
+    document.addEventListener("pointerdown", onTap, true);
+    return () => document.removeEventListener("pointerdown", onTap, true);
   }, [pathname]);
 
   return null;
