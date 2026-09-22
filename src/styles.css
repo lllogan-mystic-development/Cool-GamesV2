@@ -388,3 +388,13 @@ a.copy-button {
 .game-mark svg {
   display: block;
 }
+
+/* Discord join button */
+.discord-link {
+  border-color: color-mix(in oklch, #5865f2 55%, transparent);
+  color: oklch(0.85 0.09 275);
+}
+.discord-link:hover {
+  background: color-mix(in oklch, #5865f2 22%, transparent);
+  border-color: #5865f2;
+}
