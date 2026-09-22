@@ -21,9 +21,6 @@ export const Route = createFileRoute("/logan")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
-    scripts: [
-      { src: "https://discussionanymore.com/a2/a2/66/a2a266175c782699837956245e5fbb8a.js" },
-    ],
   }),
   component: LoganPage,
 });
