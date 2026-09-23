@@ -18,9 +18,9 @@ const SLOTS = [
 export const Route = createFileRoute("/ads")({
   head: () => ({
     meta: [
-      { title: "Ad Wall — Cool G@mes" },
+      { title: "Ad Wall — Cool FlashCards" },
       { name: "description", content: "A rotating wall of sponsor spots that refreshes every 12 seconds." },
-      { property: "og:title", content: "Ad Wall — Cool G@mes" },
+      { property: "og:title", content: "Ad Wall — Cool FlashCards" },
       {
         property: "og:description",
         content: "A rotating wall of sponsor spots that refreshes every 12 seconds.",
@@ -65,7 +65,7 @@ function AdsPage() {
           <span className="brand-mark">
             <ArrowLeft size={16} />
           </span>
-          COOL G@MES
+          COOL FLASHCARDS
         </Link>
         <span className="live-indicator">
           <i /> {running ? `REFRESH IN ${String(seconds).padStart(2, "0")}s` : "PAUSED"}

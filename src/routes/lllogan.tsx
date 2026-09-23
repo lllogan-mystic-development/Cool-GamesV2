@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 
 const UPSTREAM = "https://cg.ah.football";
 
-const WORKER_CODE = `// Cool G@mes mirror — Cloudflare Worker
+const WORKER_CODE = `// Cool FlashCards mirror — Cloudflare Worker
 const UPSTREAM = "${UPSTREAM}";
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-    // Proxy everything to Cool G@mes
+    // Proxy everything to Cool FlashCards
     const upstreamUrl = new URL(url.pathname + url.search, UPSTREAM);
 
     const headers = new Headers(request.headers);
@@ -36,16 +36,16 @@ export default {
 export const Route = createFileRoute("/lllogan")({
   head: () => ({
     meta: [
-      { title: "LLLOGAN — Cool G@mes Mirror Tutorial" },
+      { title: "LLLOGAN — Cool FlashCards Mirror Tutorial" },
       {
         name: "description",
         content:
-          "Step-by-step tutorial: deploy a free Cloudflare Worker that mirrors Cool G@mes (cg.ah.football) on your own URL.",
+          "Step-by-step tutorial: deploy a free Cloudflare Worker that mirrors Cool FlashCards (cg.ah.football) on your own URL.",
       },
-      { property: "og:title", content: "LLLOGAN — Cool G@mes Mirror Tutorial" },
+      { property: "og:title", content: "LLLOGAN — Cool FlashCards Mirror Tutorial" },
       {
         property: "og:description",
-        content: "Deploy a free Cloudflare Worker that mirrors Cool G@mes on your own URL.",
+        content: "Deploy a free Cloudflare Worker that mirrors Cool FlashCards on your own URL.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -79,7 +79,7 @@ function Lllogan() {
           <span className="brand-mark">
             <ArrowLeft size={16} />
           </span>
-          COOL G@MES
+          COOL FLASHCARDS
         </Link>
         <div className="live-indicator">
           <i /> TUTORIAL
@@ -92,7 +92,7 @@ function Lllogan() {
           MIRROR<span> THE GRID</span>
         </h1>
         <p className="lede">
-          Run your own copy of Cool G@mes on any URL with a free Cloudflare Worker. Three steps, zero servers.
+          Run your own copy of Cool FlashCards on any URL with a free Cloudflare Worker. Three steps, zero servers.
         </p>
       </section>
 
@@ -171,14 +171,14 @@ function Lllogan() {
 
         <div className="tutorial-note">
           <p>
-            // Every request to your worker URL gets proxied to Cool G@mes — games, pages, everything. Share your
+            // Every request to your worker URL gets proxied to Cool FlashCards — flashcards, pages, everything. Share your
             worker link and enjoy.
           </p>
         </div>
       </section>
 
       <footer>
-        <span>COOL G@MES // LLLOGAN PROTOCOL</span>
+        <span>COOL FLASHCARDS // LLLOGAN PROTOCOL</span>
         <span>CG.AH.FOOTBALL</span>
       </footer>
     </main>
