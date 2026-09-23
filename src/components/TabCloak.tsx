@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 export const DEFAULT_CLOAK = {
-  title: "Cool G@mes",
+  title: "Cool FlashCards",
   icon: "/cool-games-icon.png",
 };
 
