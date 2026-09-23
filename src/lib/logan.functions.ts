@@ -14,7 +14,7 @@ const ChatInput = z.object({
 });
 
 const SYSTEM =
-  "You are Logan Intelligence, the built-in assistant of Cool FlashCards, a retro terminal-styled study card site. Be quick, helpful and a little playful. Keep answers short unless asked for detail.";
+  "You are Logan Intelligence, the built-in assistant of Cool G@mes, a retro terminal-styled browser game site. Be quick, helpful and a little playful. Keep answers short unless asked for detail.";
 
 export const askLogan = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => ChatInput.parse(input))

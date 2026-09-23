@@ -11,12 +11,12 @@ type Msg = { role: "user" | "assistant"; content: string };
 export const Route = createFileRoute("/logan")({
   head: () => ({
     meta: [
-      { title: "Logan Intelligence — Cool FlashCards AI" },
-      { name: "description", content: "Chat with Logan Intelligence, the built-in AI assistant on Cool FlashCards." },
-      { property: "og:title", content: "Logan Intelligence — Cool FlashCards AI" },
+      { title: "Logan Intelligence — Cool G@mes AI" },
+      { name: "description", content: "Chat with Logan Intelligence, the built-in AI assistant on Cool G@mes." },
+      { property: "og:title", content: "Logan Intelligence — Cool G@mes AI" },
       {
         property: "og:description",
-        content: "Chat with Logan Intelligence, the built-in AI assistant on Cool FlashCards.",
+        content: "Chat with Logan Intelligence, the built-in AI assistant on Cool G@mes.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -71,7 +71,7 @@ function LoganPage() {
           <span className="brand-mark">
             <ArrowLeft size={16} />
           </span>
-          COOL FLASHCARDS
+          COOL G@MES
         </Link>
         <span className="live-indicator">
           <i /> LOGAN INTELLIGENCE
@@ -84,7 +84,7 @@ function LoganPage() {
             <div className="chat-empty">
               <Bot size={30} />
               <h1>LOGAN INTELLIGENCE</h1>
-              <p>Ask anything — homework, flashcard tips, random questions.</p>
+              <p>Ask anything — homework, game tips, random questions.</p>
             </div>
           )}
           {messages.map((msg, i) => (

@@ -39,10 +39,10 @@ function groupByCategory(list: Game[]) {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Cool FlashCards — Flip Instantly" },
-      { name: "description", content: "A fast, searchable collection of study flashcards." },
-      { property: "og:title", content: "Cool FlashCards — Flip Instantly" },
-      { property: "og:description", content: "A fast, searchable collection of study flashcards." },
+      { title: "Cool G@mes — Play Instantly" },
+      { name: "description", content: "A fast, searchable collection of browser games." },
+      { property: "og:title", content: "Cool G@mes — Play Instantly" },
+      { property: "og:description", content: "A fast, searchable collection of browser games." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -94,7 +94,7 @@ function Index() {
     return (
       <main className="game-stage">
         <header className="topbar stage-bar">
-          <Button variant="outline" size="icon" className="icon-button" onClick={() => setActiveGame(null)} aria-label="Back to flashcards" title="Back to flashcards">
+          <Button variant="outline" size="icon" className="icon-button" onClick={() => setActiveGame(null)} aria-label="Back to games" title="Back to games">
             <ArrowLeft size={19} />
           </Button>
           <div className="stage-title">
@@ -126,9 +126,9 @@ function Index() {
   return (
     <main className="launcher-shell">
       <header className="topbar">
-        <a href="#games" className="brand" aria-label="Cool FlashCards home">
+        <a href="#games" className="brand" aria-label="Cool Games home">
           <span className="brand-mark"><Gamepad2 size={18} /></span>
-          COOL FLASHCARDS
+          COOL G@MES
         </a>
         <div className="topbar-actions">
           <Button variant="ghost" size="sm" className="cloak-trigger" onClick={openCloak}>
@@ -145,19 +145,19 @@ function Index() {
 
       <section className="intro">
         <p className="eyebrow">ARCHIVE // ONLINE</p>
-        <h1>FLASH<br /><span>CARDS</span></h1>
-        <p className="lede">Pick a card. Flip it. Stay awhile.</p>
+        <h1>COOL<br /><span>G@MES</span></h1>
+        <p className="lede">Pick a game. Drop in. Stay awhile.</p>
       </section>
 
       <section className="library" id="games">
         <div className="library-head">
           <div>
-            <p className="section-kicker">FLASHCARD DIRECTORY</p>
+            <p className="section-kicker">GAME DIRECTORY</p>
             <h2>{filtered.length.toString().padStart(2, "0")} TITLES</h2>
           </div>
           <label className="search-box">
             <Search size={17} />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="SEARCH FLASHCARDS" aria-label="Search flashcards" />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="SEARCH GAMES" aria-label="Search games" />
             {query && <Button variant="ghost" size="icon" onClick={() => setQuery("")} aria-label="Clear search"><X size={16} /></Button>}
           </label>
         </div>
@@ -291,7 +291,7 @@ function Index() {
 
             <label className="cloak-field">
               <span>TAB TITLE</span>
-              <input value={cloakTitle} maxLength={80} onChange={(event) => setCloakTitle(event.target.value)} placeholder="Cool FlashCards" />
+              <input value={cloakTitle} maxLength={80} onChange={(event) => setCloakTitle(event.target.value)} placeholder="Cool G@mes" />
             </label>
             <label className="cloak-field">
               <span>ICON URL</span>
