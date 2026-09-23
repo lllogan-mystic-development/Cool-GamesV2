@@ -11,3 +11,5 @@
 - [ ] Connect your own Supabase account (waiting on you — Project Settings → Connectors → Supabase)
 - [ ] Build and verify `/studyready` (needs the database connected)
 - [ ] Deliver 100 reusable 25-day ad-free codes (needs the database connected)
+
+- [x] Add all 78 games from Logandasigma/youtube-playables (via jsDelivr wrappers in public/games/ytp/)
