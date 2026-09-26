@@ -5,7 +5,6 @@ import { BannerAd, NativeAd } from "@/components/AdUnit";
 import { CLOAK_PRESETS, DEFAULT_CLOAK, useTabCloak } from "@/components/TabCloak";
 import { Button } from "@/components/ui/button";
 import { games, type Game } from "@/data/games";
-import { isPopUnderOff, setPopUnderOff } from "@/components/PopUnder";
 
 const CATEGORY_ORDER = [
   "Action",
@@ -57,8 +56,6 @@ function Index() {
   const [activeGame, setActiveGame] = useState<Game | null>(null);
   const [cloakOpen, setCloakOpen] = useState(false);
   const cloak = useTabCloak();
-  const [popOff, setPopOff] = useState(false);
-  useEffect(() => setPopOff(isPopUnderOff()), []);
   const [cloakTitle, setCloakTitle] = useState(cloak.title);
   const [cloakIcon, setCloakIcon] = useState(cloak.icon);
   const filtered = useMemo(
@@ -95,7 +92,7 @@ function Index() {
 
   if (activeGame) {
     return (
-      <main className={popOff ? "game-stage with-ad" : "game-stage"}>
+      <main className="game-stage with-ad">
         <header className="topbar stage-bar">
           <Button variant="outline" size="icon" className="icon-button" onClick={() => setActiveGame(null)} aria-label="Back to games" title="Back to games">
             <ArrowLeft size={19} />
@@ -122,7 +119,7 @@ function Index() {
           allow="autoplay; fullscreen; gamepad"
           allowFullScreen
         />
-        {popOff && <div className="stage-ad"><BannerAd /></div>}
+        <div className="stage-ad"><BannerAd /></div>
       </main>
     );
   }
@@ -144,12 +141,6 @@ function Index() {
         </div>
       </header>
 
-      <div className="popunder-bar">
-        <span>{popOff ? "POPUNDERS OFF — EXTRA BANNERS ON" : "POPUNDERS ON"}</span>
-        <Button size="sm" variant="outline" onClick={() => setPopUnderOff(!popOff)}>
-          {popOff ? "TURN POPUNDERS BACK ON" : "TURN OFF POPUNDERS"}
-        </Button>
-      </div>
 
       <div className="ad-rail"><BannerAd /></div>
 
@@ -257,7 +248,6 @@ function Index() {
         </div>
         {filtered.length === 0 && <p className="empty-state">NO SIGNAL — TRY ANOTHER SEARCH</p>}
         <div className="ad-rail"><NativeAd /></div>
-        {popOff && <div className="ad-rail"><BannerAd /><NativeAd /></div>}
       </section>
 
 
