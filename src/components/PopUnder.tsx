@@ -5,17 +5,6 @@ const SCRIPT_SRC = "https://discussionanymore.com/a2/a2/66/a2a266175c78269983795
 const COOKIE_NAME = "cg_popunder_taps";
 const MAX_TAPS = 10;
 const SCRIPT_ID = "cg-popunder-script";
-export const OPTOUT_COOKIE = "cg_popunder_off";
-
-export function isPopUnderOff(): boolean {
-  return typeof document !== "undefined" && document.cookie.includes(`${OPTOUT_COOKIE}=1`);
-}
-
-export function setPopUnderOff(off: boolean) {
-  document.cookie = `${OPTOUT_COOKIE}=${off ? 1 : 0}; path=/; max-age=31536000; SameSite=Lax`;
-  if (off) document.getElementById(SCRIPT_ID)?.remove();
-  window.location.reload();
-}
 
 function getTapCount(): number {
   const match = document.cookie.match(new RegExp(`(?:^|; )${COOKIE_NAME}=(\\d+)`));
@@ -34,7 +23,6 @@ export function PopUnder() {
   useEffect(() => {
     if (pathname.startsWith("/ads")) return;
     if (getTapCount() >= MAX_TAPS) return;
-    if (isPopUnderOff()) return;
 
     if (!document.getElementById(SCRIPT_ID)) {
       const script = document.createElement("script");
