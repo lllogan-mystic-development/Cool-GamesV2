@@ -398,3 +398,8 @@ a.copy-button {
   background: color-mix(in oklch, #5865f2 22%, transparent);
   border-color: #5865f2;
 }
+
+.popunder-bar { margin: 14px clamp(14px, 5vw, 68px) 0; padding: 10px 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); font-size: 11px; letter-spacing: .14em; color: var(--muted-foreground); }
+.game-stage.with-ad { grid-template-rows: 66px minmax(0, 1fr) auto; }
+.stage-ad { display: flex; justify-content: center; border-top: 1px solid var(--border); background: var(--card); }
+@media (max-width: 720px) { .game-stage.with-ad { grid-template-rows: 58px minmax(0, 1fr) auto; } }
