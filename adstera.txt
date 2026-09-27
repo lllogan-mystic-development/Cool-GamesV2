@@ -1,0 +1,21 @@
+<script src="https://discussionanymore.com/a2/a2/66/a2a266175c782699837956245e5fbb8a.js"></script> # Popunder
+<script>
+  atOptions = {
+    'key' : '4e03b9fec0962099af58ad914579b156',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://discussionanymore.com/4e03b9fec0962099af58ad914579b156/invoke.js"></script> #Banner728x90
+<script>
+  atOptions = {
+    'key' : 'eac2e4baea7e6f0a69775606f8ba3f36',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://discussionanymore.com/eac2e4baea7e6f0a69775606f8ba3f36/invoke.js"></script> # Banner 160x300
